@@ -66,7 +66,10 @@ namespace EmailSenderNet.Services.Impl
                     string filePath = Directory.GetCurrentDirectory() + "\\Public\\Template\\information-schedule.html";
                     string emailTemplateText = File.ReadAllText(filePath);
 
-                    string replacingHtml = emailTemplateText.Replace("{", "{{").Replace("}", "}}");
+                    
+                    DateTime date = DateTime.Now;
+                    // create custom date from replacing
+                    string replacingHtml = emailTemplateText.Replace("{", "{{").Replace("}", "}}").Replace("@tcmb", date.ToString("yyyy-MM-dd HH:mm:ss"));
                     replacingHtml = string.Format(replacingHtml, emailHtmlData.EmailName, DateTime.Today.ToShortDateString());
 
                     BodyBuilder emailBodyBuilder = new BodyBuilder();
